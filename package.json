@@ -1,11 +1,13 @@
 {
   "name": "alkotappd",
+  "description": "Application that combines beers in Alko's catalog with their matching Untappd scores.",
   "engines": {
     "node": "14"
   },
   "author": {
     "name": "penny-five"
   },
+  "private": true,
   "license": "MIT",
   "dependencies": {
     "@tsconfig/node12": "1.0.7",
