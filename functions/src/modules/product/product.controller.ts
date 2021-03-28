@@ -10,7 +10,7 @@ export class ProductController {
     this.productService = productService;
   }
 
-  @Get('public/stores/:storeId/products')
+  @Get('stores/:storeId/products')
   async getStoreProducts(@Param('storeId', ParseIntPipe) storeId: number) {
     const products = await this.productService.getAllStoreProducts(storeId);
 

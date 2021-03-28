@@ -26,8 +26,7 @@ export class SyncProductsTask extends ScheduledTask<SyncProductsTaskResult> {
 
     let page = 0;
 
-    while (page < 5) {
-      console.log('get page', page);
+    while (true || page < 200 /* Add as a safety measure to prevent infinite loop */) {
       const { results, isLastPage } = await this.alkoClient.getProductPage(page);
 
       products.push(...results);
@@ -38,7 +37,7 @@ export class SyncProductsTask extends ScheduledTask<SyncProductsTaskResult> {
 
       page += 1;
 
-      sleep(1000);
+      await sleep(1000);
     }
 
     const syncResult = await this.databaseClient.sync({

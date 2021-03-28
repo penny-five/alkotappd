@@ -11,7 +11,7 @@ export class StoreController {
     this.storeService = storeService;
   }
 
-  @Get('public/stores')
+  @Get('stores')
   async getAllStores(@Query('search', new IsRequiredPipe()) searchphrase: string) {
     const stores = await this.storeService.searchStores(searchphrase);
 

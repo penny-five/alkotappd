@@ -2,7 +2,7 @@
 
 ## What is this?
 
-Application that combines beers in Alko's catalog with their matching Untappd scores.
+Application that combines beers in [Alko](https://alko.fi)'s catalog with their matching [Untappd](https://untappd.com) scores.
 
 ## Instructions
 
@@ -16,36 +16,38 @@ Application that combines beers in Alko's catalog with their matching Untappd sc
 
 1. Install dependencies
 
-    ```sh
-    yarn install
-    ```
+   ```sh
+   yarn install
+   ```
 
 2. Login with Firebase
 
-    ```sh
-    yarn firebase:login
-    ```
+   ```sh
+   yarn firebase:login
+   ```
 
 3. Set active Firebase project
 
-    ```sh
-    yarn firebase:use [project_id]
-    ```
+   ```sh
+   yarn firebase:use [project_id]
+   ```
 
-4. Build functions
+4. Init emulators
 
-    ```
-    yarn functions:build
-    ```
+   ```
+   yarn firebase:emulators:init
+   ```
 
-5. Init emulators
+5. Start dev environment
 
-    ```
-    yarn firebase:emulators:init
-    ```
+   ```
+   yarn dev
+   ```
 
-6. Start emulators
+   This will do the following things:
 
-    ```
-    yarn firebase:emulators:start
-    ```
+   - Start Firebase emulator
+   - Compile functions in watch mode
+   - Start Vite dev server
+
+   Open `http://localhost:8080` in browser.

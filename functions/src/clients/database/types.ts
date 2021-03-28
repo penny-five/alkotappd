@@ -3,7 +3,9 @@ export interface DatabaseEntry {
   updatedAt: Date;
   createdAt: Date;
   name: string;
-  untappdRating: number | null;
+  untappdBeerId: number | null;
+  untappdRatingScore: number | null;
+  untappdRatingCount: number | null;
   untappdBeerSlug: string | null;
 }
 

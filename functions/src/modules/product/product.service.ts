@@ -41,7 +41,9 @@ export class ProductService {
       const entry = databaseEntries.find(entry => entry.id === alkoProduct.id);
       return {
         ...alkoProduct,
-        untappdRating: entry?.untappdRating ?? null,
+        untappdBeerId: entry?.untappdBeerId ?? null,
+        untappdRatingCount: entry?.untappdRatingCount ?? null,
+        untappdRatingScore: entry?.untappdRatingScore ?? null,
         untappdBeerSlug: entry?.untappdBeerSlug ?? null
       };
     });

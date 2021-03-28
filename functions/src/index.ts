@@ -46,7 +46,7 @@ export const syncProducts = functions.pubsub
   });
 
 export const updateRatings = functions.pubsub
-  .schedule('every 2 hours')
+  .schedule('every 90 minutes')
   .timeZone('Europe/Helsinki')
   .onRun(async () => {
     const task = new UpdateRatingsTask(new UntappdClient(new Config()), new DatabaseClient());

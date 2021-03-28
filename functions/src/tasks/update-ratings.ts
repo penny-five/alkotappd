@@ -8,7 +8,12 @@ export interface UpdateRatingsTaskResult {
 }
 
 export class UpdateRatingsTask extends ScheduledTask<UpdateRatingsTaskResult> {
-  private static readonly BATCH_SIZE = 10;
+  /**
+   * Untappd API has rate limit of 100 requests per hour. To process one item,
+   * 2 separate requests are need. With batch size of 30 rate limiting should
+   * be avoided if the task is executed at max once per hour.
+   */
+  private static readonly BATCH_SIZE = 30;
 
   private databaseClient: DatabaseClient;
 
@@ -36,13 +41,17 @@ export class UpdateRatingsTask extends ScheduledTask<UpdateRatingsTaskResult> {
 
         updatedEntries.push({
           ...entry,
-          untappdRating: untappdGetBeerInfoResponse.response.beer.rating_score,
+          untappdBeerId: untappdGetBeerInfoResponse.response.beer.bid,
+          untappdRatingScore: untappdGetBeerInfoResponse.response.beer.rating_score,
+          untappdRatingCount: untappdGetBeerInfoResponse.response.beer.rating_count,
           untappdBeerSlug: untappdGetBeerInfoResponse.response.beer.beer_slug
         });
       } else {
         updatedEntries.push({
           ...entry,
-          untappdRating: null,
+          untappdBeerId: null,
+          untappdRatingScore: null,
+          untappdRatingCount: null,
           untappdBeerSlug: null
         });
       }
@@ -58,12 +67,6 @@ export class UpdateRatingsTask extends ScheduledTask<UpdateRatingsTaskResult> {
   }
 
   private compareEntriesByUpdatePriority(first: DatabaseEntry, second: DatabaseEntry) {
-    if (first.untappdRating != null && second.untappdRating != null) {
-      return first.createdAt.getTime() - second.createdAt.getTime();
-    }
-    if (first.untappdRating == null && second.untappdRating == null) {
-      return first.createdAt.getTime() - second.createdAt.getTime();
-    }
-    return first.untappdRating != null ? 1 : -1;
+    return first.updatedAt.getTime() - second.updatedAt.getTime();
   }
 }

@@ -27,7 +27,9 @@ export class DatabaseClient {
       createdAt: (doc.get('createdAt') as Timestamp).toDate(),
       updatedAt: (doc.get('updatedAt') as Timestamp).toDate(),
       name: doc.get('name'),
-      untappdRating: doc.get('untappdRating'),
+      untappdBeerId: doc.get('untappdBeerId'),
+      untappdRatingScore: doc.get('untappdRatingScore'),
+      untappdRatingCount: doc.get('untappdRatingCount'),
       untappdBeerSlug: doc.get('untappdBeerSlug')
     }));
 
@@ -70,7 +72,8 @@ export class DatabaseClient {
             ...entry,
             createdAt: new Date(),
             updatedAt: new Date(),
-            untappdRating: null,
+            untappdRatingScore: null,
+            untappdRatingCount: null,
             untappdBeerSlug: null
           });
 

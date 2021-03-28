@@ -28,6 +28,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "build:watch": "tsc --watch"
+    "dev": "tsc --watch"
   }
 }
