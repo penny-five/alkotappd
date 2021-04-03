@@ -12,6 +12,7 @@ export interface DatabaseEntry {
 export interface SyncDatabaseCommand {
   entries: {
     id: string;
+    name: string;
   }[];
 }
 

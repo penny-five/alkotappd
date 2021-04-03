@@ -35,7 +35,7 @@ export class ProductService {
       page += 1;
     }
 
-    const databaseEntries = await this.databaseClient.getAll();
+    const databaseEntries = await this.databaseClient.getAll({ useCache: true });
 
     const products: Product[] = alkoProducts.map(alkoProduct => {
       const entry = databaseEntries.find(entry => entry.id === alkoProduct.id);

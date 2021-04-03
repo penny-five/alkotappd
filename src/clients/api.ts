@@ -28,7 +28,8 @@ export class ApiClient {
 
   constructor() {
     this.client = ky.extend({
-      prefixUrl: '/api'
+      prefixUrl: '/api',
+      timeout: 20 * 1000
     });
   }
 

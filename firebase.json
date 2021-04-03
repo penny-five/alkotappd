@@ -1,9 +1,10 @@
 {
   "hosting": {
+    "predeploy": "yarn hosting:build",
     "public": "dist",
     "rewrites": [
       {
-        "source": "/api/*",
+        "source": "/api/**",
         "function": "api"
       },
       {
@@ -17,7 +18,7 @@
   },
   "functions": {
     "source": "functions",
-    "predeploy": "yarn --cwd functions build"
+    "predeploy": "yarn functions:build"
   },
   "emulators": {
     "functions": {

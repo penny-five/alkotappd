@@ -19,7 +19,7 @@
       <template v-else>
         <store-item :store="selectedStore" :is-selected="true" @unselect="onUnselectStore" />
         <div class="my-4 sm:my-8 border-b-2 border-gray-200" />
-        <search-indicator v-if="isLoadingProducts" />
+        <loading-indicator v-if="isLoadingProducts" />
         <template v-else>
           <sort-selector v-model="selectedSort" :options="sortOptions" />
           <product-item v-for="product of sortedProducts" :key="product.id" :product="product" />
@@ -34,10 +34,10 @@ import { computed, defineComponent, onMounted, ref, watch } from 'vue';
 
 import { Product, Store } from './clients/api';
 import { useApi } from './composables/use-api';
-import SortSelector, { SortOption } from './components/sort-selector.vue';
-import SearchIndicator from './components/search-indicator.vue';
+import LoadingIndicator from './components/loading-indicator.vue';
 import ProductItem from './components/product-item.vue';
 import SearchInput from './components/search-input.vue';
+import SortSelector, { SortOption } from './components/sort-selector.vue';
 import StoreItem from './components/store-item.vue';
 
 const SORT_BY_ABV: SortOption = { value: 'abv', label: 'ABV' };
@@ -49,10 +49,10 @@ const SORT_BY_COUNTRY: SortOption = { value: 'country', label: 'Valmistusmaa' };
 export default defineComponent({
   name: 'App',
   components: {
-    SortSelector,
-    SearchIndicator,
+    LoadingIndicator,
     ProductItem,
     SearchInput,
+    SortSelector,
     StoreItem
   },
   setup(props) {

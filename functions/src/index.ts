@@ -19,25 +19,30 @@ const getServer = mem(async () => {
   const server = express();
 
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
+  app.setGlobalPrefix('/api');
   await app.init();
 
   return server;
 });
 
 export const api = functions
-  .region('europe-west1')
   .runWith({
     maxInstances: 1,
-    memory: '512MB',
-    timeoutSeconds: 30
+    memory: '1GB',
+    timeoutSeconds: 30,
+    ingressSettings: 'ALLOW_ALL'
   })
   .https.onRequest(async (req, res) => {
     const server = await getServer();
     server(req, res);
   });
 
-export const syncProducts = functions.pubsub
-  .schedule('every day 01:00')
+export const syncProducts = functions
+  .runWith({
+    memory: '512MB',
+    timeoutSeconds: 540
+  })
+  .pubsub.schedule('every day 01:00')
   .timeZone('Europe/Helsinki')
   .onRun(async () => {
     const task = new SyncProductsTask(new AlkoClient(), new DatabaseClient());
@@ -45,8 +50,11 @@ export const syncProducts = functions.pubsub
     console.log(result);
   });
 
-export const updateRatings = functions.pubsub
-  .schedule('every 90 minutes')
+export const updateRatings = functions
+  .runWith({
+    timeoutSeconds: 60
+  })
+  .pubsub.schedule('every 90 minutes')
   .timeZone('Europe/Helsinki')
   .onRun(async () => {
     const task = new UpdateRatingsTask(new UntappdClient(new Config()), new DatabaseClient());

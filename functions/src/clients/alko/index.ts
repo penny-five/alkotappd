@@ -1,3 +1,5 @@
+import { Agent as HttpAgent } from 'http';
+import { Agent as HttpsAgent } from 'https';
 import querystring from 'querystring';
 
 import { Injectable } from '@nestjs/common';
@@ -15,7 +17,11 @@ export class AlkoClient {
 
   constructor() {
     this.client = got.extend({
-      prefixUrl: 'https://www.alko.fi/INTERSHOP/web/WFS/Alko-OnlineShop-Site/fi_FI/-/EUR'
+      prefixUrl: 'https://www.alko.fi/INTERSHOP/web/WFS/Alko-OnlineShop-Site/fi_FI/-/EUR',
+      agent: {
+        http: new HttpAgent({ keepAlive: true }),
+        https: new HttpsAgent({ keepAlive: true })
+      }
     });
   }
 

@@ -40,9 +40,10 @@
     "firebase:login": "firebase login",
     "firebase:use": "firebase use",
     "firebase:functions:shell": "firebase functions:shell",
+    "firebase:functions:config:set": "firebase functions:config:set",
     "firebase:emulators:init": "firebase init emulators",
     "firebase:emulators:start": "firebase emulators:start --only firestore,functions",
-    "firebase:deploy": "firebase deploy --only hosting,firestore, functions",
+    "firebase:deploy": "firebase deploy --only hosting,firestore,functions",
     "dev": "concurrently \"yarn hosting:dev\" \"yarn functions:dev\" \"yarn firebase:emulators:start\""
   },
   "husky": {
@@ -51,7 +52,7 @@
     }
   },
   "lint-staged": {
-    "*.{json,ts,md}": [
+    "*.{json,ts,js,md}": [
       "prettier --write"
     ]
   }

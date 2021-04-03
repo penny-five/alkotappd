@@ -37,7 +37,7 @@ export class SyncProductsTask extends ScheduledTask<SyncProductsTaskResult> {
 
       page += 1;
 
-      await sleep(1000);
+      await sleep(500);
     }
 
     const syncResult = await this.databaseClient.sync({

@@ -1,6 +1,7 @@
 import { Firestore, Timestamp } from '@google-cloud/firestore';
 import { Injectable } from '@nestjs/common';
 import admin from 'firebase-admin';
+import mem from 'mem';
 
 import {
   DatabaseEntry,
@@ -17,7 +18,11 @@ export class DatabaseClient {
     this.db = admin.firestore();
   }
 
-  async getAll() {
+  async getAll(params?: { useCache: boolean }) {
+    if (params?.useCache) {
+      return this.cachedGetAll();
+    }
+
     const collectionRef = this.db.collection('entries');
 
     const snapshot = await collectionRef.get();
@@ -34,6 +39,11 @@ export class DatabaseClient {
     }));
 
     return entries;
+  }
+
+  @mem.decorator({ maxAge: 1000 * 60 * 60 })
+  private async cachedGetAll(): Promise<DatabaseEntry[]> {
+    return this.getAll({ useCache: false });
   }
 
   async sync(command: SyncDatabaseCommand) {
@@ -53,13 +63,7 @@ export class DatabaseClient {
         const currentIndex = currentEntries.findIndex(({ id }) => id === entry.id);
 
         if (currentIndex >= 0) {
-          await collectionRef.doc(entry.id).set(
-            {
-              ...entry,
-              updatedAt: new Date()
-            },
-            { merge: true }
-          );
+          await collectionRef.doc(entry.id).set(entry, { merge: true });
 
           deletableEntries.splice(
             deletableEntries.findIndex(({ id }) => id === entry.id),
