@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref, watch } from 'vue';
+import { computed, defineComponent, ref, watch } from 'vue';
 
 import { Product, Store } from './clients/api';
 import { useApi } from './composables/use-api';
@@ -55,7 +55,7 @@ export default defineComponent({
     SortSelector,
     StoreItem
   },
-  setup(props) {
+  setup() {
     const { api } = useApi();
 
     const storeSearchphrase = ref('');
@@ -82,7 +82,7 @@ export default defineComponent({
       switch (selectedSort.value.value) {
         case SORT_BY_ABV.value:
           return Array.from<Product>(storeProducts.value!).sort((first, second) => {
-            return parseInt(second.abv) - parseInt(first.abv);
+            return parseInt(second.abv, 10) - parseInt(first.abv, 10);
           });
         case SORT_BY_RATING.value:
           return Array.from<Product>(storeProducts.value!).sort((first, second) => {

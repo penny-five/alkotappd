@@ -44,13 +44,12 @@
 </template>
 
 <script lang="ts">
-import debounce from 'lodash.debounce';
 import { computed, defineComponent, PropType } from 'vue';
 
 import { Product } from '../clients/api';
 
 export default defineComponent({
-  name: 'product-item',
+  name: 'ProductItem',
   props: {
     product: {
       type: Object as PropType<Product>,
@@ -58,16 +57,16 @@ export default defineComponent({
     }
   },
   emits: ['select'],
-  setup({ product }) {
+  setup(props) {
     const ratingScoreString = computed(() => {
-      return product.untappdRatingScore?.toLocaleString('FI-fi', {
+      return props.product.untappdRatingScore?.toLocaleString('FI-fi', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
       });
     });
 
     const untappdUrl = computed(() => {
-      return `https://untappd.com/b/${product.untappdBeerSlug}/${product.untappdBeerId}`;
+      return `https://untappd.com/b/${props.product.untappdBeerSlug}/${props.product.untappdBeerId}`;
     });
 
     return { ratingScoreString, untappdUrl };

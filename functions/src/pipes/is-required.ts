@@ -13,8 +13,9 @@ export class IsRequiredPipe implements PipeTransform {
       return value;
     }
 
-    throw new BadRequestException(null, this.buildErrorMessage(metadata));
+    throw new BadRequestException(null, IsRequiredPipe.buildErrorMessage(metadata));
   }
+
   private isValid(value: any) {
     if (value === null) return false;
     if (typeof value === 'string') return this.allowEmpty || value.length > 0;
@@ -22,7 +23,7 @@ export class IsRequiredPipe implements PipeTransform {
     return true;
   }
 
-  private buildErrorMessage(metadata: ArgumentMetadata) {
+  private static buildErrorMessage(metadata: ArgumentMetadata) {
     if (metadata.type === 'query') {
       return `Query parameter "${metadata.data}" is required`;
     }

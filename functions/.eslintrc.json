@@ -1,0 +1,10 @@
+{
+  "root": true,
+  "extends": ["standard", "plugin:import/typescript", "plugin:prettier/recommended"],
+  "plugins": ["prettier"],
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "import/extensions": ["error", "never"],
+    "lines-between-class-members": ["error", "always"]
+  }
+}

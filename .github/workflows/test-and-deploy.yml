@@ -13,9 +13,23 @@ jobs:
         run: yarn install
       - name: Run prettier
         run: yarn prettier:check
+  lint:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Install dependencies
+        run: yarn install
+      - name: Run eslint
+        run: yarn lint && yarn functions:lint
   deploy:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-18.04
+    needs:
+      - check_formatting
+      - lint
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1

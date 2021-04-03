@@ -19,13 +19,12 @@
 </template>
 
 <script lang="ts">
-import debounce from 'lodash.debounce';
 import { defineComponent, PropType } from 'vue';
 
 import { Store } from '../clients/api';
 
 export default defineComponent({
-  name: 'store-item',
+  name: 'StoreItem',
   props: {
     store: {
       type: Object as PropType<Store>,

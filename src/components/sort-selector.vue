@@ -40,6 +40,7 @@ export default defineComponent({
       required: true
     }
   },
+  emits: ['update:modelValue'],
   setup(_props, { emit }) {
     const onSelect = (value: SortOption) => {
       emit('update:modelValue', value);

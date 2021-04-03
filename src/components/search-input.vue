@@ -10,10 +10,10 @@
 
 <script lang="ts">
 import debounce from 'lodash.debounce';
-import { defineComponent, PropType } from 'vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'search-input',
+  name: 'SearchInput',
   props: {
     modelValue: {
       type: String,
