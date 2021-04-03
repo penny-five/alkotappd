@@ -13,8 +13,6 @@ jobs:
         run: yarn install
       - name: Run prettier
         run: yarn prettier:check
-    env:
-      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
   deploy:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-18.04
@@ -26,6 +24,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --production
       - name: Deploy
-        run: 'yarn firebase:deploy -m "Deploy from GitHub: ${GITHUB_SHA}"'
+        run: 'yarn firebase:deploy --project ${FIREBASE_PROJECT} -m "Deploy from GitHub: ${GITHUB_SHA}"'
     env:
       FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      FIREBASE_PROJECT: ${{ secrets.FIREBASE_PROJECT }}
