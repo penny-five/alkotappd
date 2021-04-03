@@ -1,12 +1,16 @@
 {
-  "name": "alkotappd-cloud-functions",
-  "engines": {
-    "node": "14"
-  },
+  "name": "alkotappd-functions",
   "author": {
     "name": "penny-five"
   },
+  "repository": {
+    "url": "git@github.com:penny-five/alkotappd.git"
+  },
+  "private": "true",
   "license": "MIT",
+  "engines": {
+    "node": "14"
+  },
   "main": "lib/index.js",
   "dependencies": {
     "@firebase/app-types": "0.6.1",

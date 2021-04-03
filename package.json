@@ -1,14 +1,17 @@
 {
   "name": "alkotappd",
   "description": "Application that combines beers in Alko's catalog with their matching Untappd scores.",
-  "engines": {
-    "node": "14"
-  },
   "author": {
     "name": "penny-five"
   },
+  "repository": {
+    "url": "git@github.com:penny-five/alkotappd.git"
+  },
   "private": true,
   "license": "MIT",
+  "engines": {
+    "node": "14"
+  },
   "dependencies": {
     "@types/lodash.debounce": "4.0.6",
     "@vitejs/plugin-vue": "1.2.0",
