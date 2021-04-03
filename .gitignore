@@ -1,3 +1,5 @@
+functions/lib
+functions/.runtimeconfig.json
 node_modules
 dist
 .firebase
