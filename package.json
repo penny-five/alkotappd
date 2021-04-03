@@ -65,7 +65,11 @@
     }
   },
   "lint-staged": {
-    "*.{json,ts,js,md,yml,yaml}": [
+    "*.{ts,vue}": [
+      "eslint",
+      "prettier --write"
+    ],
+    "*.{json,js,md,yml,yaml}": [
       "prettier --write"
     ]
   }
