@@ -16,13 +16,13 @@ Application that combines beers in [Alko](https://alko.fi)'s catalog with their 
 
 ## Instructions
 
-### Setup project
+### How to setup project on Google Cloud
 
 1. Create a new project on Google Cloud
 2. Add Firebase (https://console.firebase.google.com/)
 3. Enable Cloud Firestore API
 
-### Starting local dev environment
+### How to start local dev environment
 
 1. Install dependencies
 
@@ -44,13 +44,13 @@ Application that combines beers in [Alko](https://alko.fi)'s catalog with their 
 
 4. Init emulators
 
-   ```
+   ```sh
    yarn firebase:emulators:init
    ```
 
 5. Start dev environment
 
-   ```
+   ```sh
    yarn dev
    ```
 
@@ -62,7 +62,35 @@ Application that combines beers in [Alko](https://alko.fi)'s catalog with their 
 
    Open `http://localhost:8080` in browser.
 
-### Deploying to production
+### How to run tasks in local dev environment
+
+1. Start Firebase emulator functions shell
+
+   ```sh
+   firebase:functions:shell
+   ```
+
+2. In functions shell run
+
+   ```sh
+   syncProducts();
+   ```
+
+   This will fetch all products from Alko catalog and add them to local Firestore.
+
+3. In functions shell run
+
+   ```sh
+   updateRatings();
+   ```
+
+   This will fetch ratings for 30 beers and add them to local Firestore.
+
+   **Be careful: Untappd API has a rate limit of 100 requests per hour and running this function once will consume 60% of that hourly quota.**
+
+   `BATCH_SIZE` variable in `functions/src/tasks/update-ratings.ts` can be modified to use a smaller batch size, resulting in less requests.
+
+### How to deploy to production
 
 1. Install dependencies
 
@@ -87,3 +115,7 @@ Application that combines beers in [Alko](https://alko.fi)'s catalog with their 
    ```sh
    yarn firebase:deploy
    ```
+
+## License
+
+MIT.
