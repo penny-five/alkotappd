@@ -12,12 +12,16 @@
             v-for="store in storeSearchResults"
             :key="store.id"
             :store="store"
+            :selectable="true"
             @select="onSelectStore(store)"
           />
         </ul>
       </template>
       <template v-else>
-        <store-item :store="selectedStore" :is-selected="true" @unselect="onUnselectStore" />
+        <div class="my-4">
+          <back-button @click="onClearStoreSelection" />
+        </div>
+        <store-item :store="selectedStore" :selectable="false" />
         <div class="my-4 sm:my-8 border-b-2 border-gray-200" />
         <loading-indicator v-if="isLoadingProducts" />
         <template v-else>
@@ -34,6 +38,7 @@ import { computed, defineComponent, ref, watch } from 'vue';
 
 import { Product, Store } from './clients/api';
 import { useApi } from './composables/use-api';
+import BackButton from './components/back-button.vue';
 import LoadingIndicator from './components/loading-indicator.vue';
 import ProductItem from './components/product-item.vue';
 import SearchInput from './components/search-input.vue';
@@ -49,6 +54,7 @@ const SORT_BY_COUNTRY: SortOption = { value: 'country', label: 'Valmistusmaa' };
 export default defineComponent({
   name: 'App',
   components: {
+    BackButton,
     LoadingIndicator,
     ProductItem,
     SearchInput,
@@ -116,7 +122,7 @@ export default defineComponent({
       storeProducts.value = products;
     };
 
-    const onUnselectStore = () => {
+    const onClearStoreSelection = () => {
       storeSearchphrase.value = '';
       storeSearchResults.value = null;
       selectedStore.value = null;
@@ -132,7 +138,7 @@ export default defineComponent({
       selectedSort,
       isLoadingProducts,
       onSelectStore,
-      onUnselectStore
+      onClearStoreSelection
     };
   }
 });
