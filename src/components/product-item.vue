@@ -15,11 +15,11 @@
         <div class="flex items-center text-xs text-gray-500 font-medium truncate">
           <span class="text-base mr-1">%</span>
           <span>{{ product.abv }}</span>
-          <span class="material-icons text-base ml-2 mr-1">label</span>
+          <i class="mi-tag icon-xs ml-2 mr-1" />
           <span>{{ product.type }}</span>
-          <span class="invisible md:visible material-icons text-base ml-2 mr-1">room</span>
+          <i class="mi-location invisible md:visible icon-xs ml-2 mr-1" />
           <span class="invisible md:visible">{{ product.country }}</span>
-          <span class="invisible md:visible material-icons text-base ml-2 mr-1">shopping_cart</span>
+          <i class="mi-shopping-cart invisible md:visible icon-xs ml-2 mr-1" />
           <span class="invisible md:visible">{{ product.size }} L</span>
         </div>
       </div>

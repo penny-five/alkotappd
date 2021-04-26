@@ -4057,6 +4057,11 @@ modern-normalize@^1.0.0:
   resolved "https://registry.yarnpkg.com/modern-normalize/-/modern-normalize-1.0.0.tgz#539d84a1e141338b01b346f3e27396d0ed17601e"
   integrity sha512-1lM+BMLGuDfsdwf3rsgBSrxJwAZHFIrQ8YR61xIqdHo0uNKI9M52wNpHSrliZATJp51On6JD0AfRxd4YGSU0lw==
 
+mono-icons@1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/mono-icons/-/mono-icons-1.2.4.tgz#463a1209a8cf0208b15ff91c1de6c38aadc9e828"
+  integrity sha512-viQGdeuFGuxPHRLhl5Km7zBI8akErKZziZ6ADDlWTk5OPhOIrWxhlOkiVHARdOkmBfyjcLBJoR9Iptu5HICxdQ==
+
 morgan@^1.10.0, morgan@^1.8.2:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.10.0.tgz#091778abc1fc47cd3509824653dae1faab6b17d7"

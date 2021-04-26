@@ -1,8 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;300;400;500;600;700;800&display=swap');
+@import 'mono-icons/iconfont/icons.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  @variants responsive {
+    .icon-xs {
+      line-height: 1;
+      font-size: 1.1rem;
+    }
+    .icon-sm {
+      line-height: 1;
+      font-size: 1.4rem;
+    }
+    .icon-base {
+      line-height: 1;
+      font-size: 1.5rem;
+    }
+    .icon-lg {
+      line-height: 1;
+      font-size: 1.6rem;
+    }
+    .icon-xl {
+      line-height: 1;
+      font-size: 1.8rem;
+    }
+    .icon-4xl {
+      line-height: 1;
+      font-size: 3rem;
+    }
+  }
+}
 
 body {
   overflow-y: scroll;

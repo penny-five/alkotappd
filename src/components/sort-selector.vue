@@ -1,6 +1,6 @@
 <template>
-  <div class="flex my-4 px-2 sm:px-4 select-none">
-    <span class="material-icons mr-3 text-gray-700">sort</span>
+  <div class="flex items-start my-4 px-2 sm:px-4 select-none">
+    <i class="mi-sort mt-1 mr-3 icon-base text-gray-700" />
     <ul class="flex flex-grow flex-row flex-wrap">
       <template v-for="option of options" :key="option">
         <li
