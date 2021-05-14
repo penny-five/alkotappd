@@ -64,13 +64,15 @@ Application that combines beers in [Alko](https://alko.fi)'s catalog with their 
 
 ### How to run tasks in local dev environment
 
-1. Start Firebase emulator functions shell
+1. Start local dev environment [as instructed](#how-to-start-local-dev-environment)
+
+2. Start Firebase emulator functions shell
 
    ```sh
-   firebase:functions:shell
+   yarn firebase:functions:shell
    ```
 
-2. In functions shell run
+3. In functions shell run
 
    ```sh
    syncProducts();
@@ -78,7 +80,7 @@ Application that combines beers in [Alko](https://alko.fi)'s catalog with their 
 
    This will fetch all products from Alko catalog and add them to local Firestore.
 
-3. In functions shell run
+4. In functions shell run
 
    ```sh
    updateRatings();
