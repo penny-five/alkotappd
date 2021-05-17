@@ -13,10 +13,20 @@ import { getPackagingType, sanitizeProductName } from './utils';
 export class AlkoClient {
   private static readonly BEER_CATEGORY_ID = 'yW3AqHh4ul0AAAFVIGocppid';
 
-  private client: typeof got;
+  private websiteClient: typeof got;
+
+  private intershopApiClient: typeof got;
 
   constructor() {
-    this.client = got.extend({
+    this.websiteClient = got.extend({
+      prefixUrl: 'https://www.alko.fi',
+      agent: {
+        http: new HttpAgent({ keepAlive: true }),
+        https: new HttpsAgent({ keepAlive: true })
+      }
+    });
+
+    this.intershopApiClient = got.extend({
       prefixUrl: 'https://www.alko.fi/INTERSHOP/web/WFS/Alko-OnlineShop-Site/fi_FI/-/EUR',
       agent: {
         http: new HttpAgent({ keepAlive: true }),
@@ -26,7 +36,7 @@ export class AlkoClient {
   }
 
   async searchStores(searchphrase: string) {
-    const { body } = await this.client.post('ALKO_ViewStoreLocator-Dispatch', {
+    const { body } = await this.intershopApiClient.post('ALKO_ViewStoreLocator-Dispatch', {
       form: {
         search: '',
         SearchTerm: searchphrase
@@ -46,8 +56,23 @@ export class AlkoClient {
     return stores;
   }
 
+  async getStore(id: string): Promise<AlkoStore> {
+    const { body } = await this.websiteClient.get(`myymalat-palvelut/${id}`);
+
+    const $ = cheerio.load(body);
+
+    const name = $('.store-info .store-name').text().trim();
+    const address = $('.store-info [itemprop=address]').text().trim();
+
+    return {
+      id,
+      name,
+      address
+    };
+  }
+
   async getProductPage(page: number, filters?: { storeId: number }) {
-    const { body } = await this.client.get('ViewParametricSearch-ProductPagingRandom', {
+    const { body } = await this.intershopApiClient.get('ViewParametricSearch-ProductPagingRandom', {
       searchParams: {
         SortingAttribute: 'name-asc',
         PageSize: 12,

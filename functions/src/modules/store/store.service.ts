@@ -10,6 +10,11 @@ export class StoreService {
     this.alkoClient = alkoClient;
   }
 
+  async getStore(id: string) {
+    const store = await this.alkoClient.getStore(id);
+    return store;
+  }
+
   async searchStores(searchphrase: string) {
     const stores = await this.alkoClient.searchStores(searchphrase);
     return stores;

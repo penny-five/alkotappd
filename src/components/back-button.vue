@@ -15,7 +15,7 @@
     @click="$emit('click')"
   >
     <i class="mi-arrow-left icon-sm mr-2" />
-    Takaisin
+    <slot>Takaisin</slot>
   </button>
 </template>
 

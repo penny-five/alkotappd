@@ -45,6 +45,11 @@ export class ApiClient {
     return response;
   }
 
+  async getStore(storeId: string) {
+    const response = await this.client.get(`stores/${storeId}`).json<Store>();
+    return response;
+  }
+
   async getStoreProducts(storeId: string) {
     const response = await this.client.get(`stores/${storeId}/products`).json<Product[]>();
 

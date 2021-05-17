@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 
 import { IsRequiredPipe } from '../../pipes/is-required';
 import { StoreService } from './store.service';
@@ -9,6 +9,12 @@ export class StoreController {
 
   constructor(storeService: StoreService) {
     this.storeService = storeService;
+  }
+
+  @Get('stores/:id')
+  async getStore(@Param('id') id: string) {
+    const store = await this.storeService.getStore(id);
+    return store;
   }
 
   @Get('stores')
