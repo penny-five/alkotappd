@@ -1,7 +1,7 @@
 <template>
   <div>
     <loading-indicator v-if="isLoading">Ladataan myymälän tietoja...</loading-indicator>
-    <template v-else>
+    <template v-else-if="store != null">
       <div class="my-4">
         <back-button @click="onClickBack">Takaisin hakuun</back-button>
       </div>
