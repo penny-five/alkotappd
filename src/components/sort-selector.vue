@@ -11,7 +11,21 @@
         </li>
         <li
           v-else
-          class="flex mb-2 mr-2 bg-gray-200 text-gray-700 rounded-full py-1 px-3 text-sm font-medium cursor-pointer hover:bg-gray-300 transition-colors"
+          class="
+            flex
+            mb-2
+            mr-2
+            bg-gray-200
+            text-gray-700
+            rounded-full
+            py-1
+            px-3
+            text-sm
+            font-medium
+            cursor-pointer
+            hover:bg-gray-300
+            transition-colors
+          "
           @click="onSelect(option)"
         >
           <span>{{ option.label }}</span>

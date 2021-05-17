@@ -24,18 +24,48 @@
         </div>
       </div>
       <div
-        class="flex flex-shrink-0 items-stretch justify-items-stretch w-14 h-14 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors"
+        class="
+          flex flex-shrink-0
+          items-stretch
+          justify-items-stretch
+          w-14
+          h-14
+          rounded-full
+          bg-gray-100
+          group-hover:bg-gray-200
+          transition-colors
+        "
       >
         <a
           v-if="product.untappdRatingScore != null"
           :href="untappdUrl"
           target="_blank"
-          class="flex items-center justify-center rounded-full flex-grow text-lg font-semibold text-opacity-90 text-gray-800 border-2 border-transparent hover:border-gray-500 transition-colors"
+          class="
+            flex
+            items-center
+            justify-center
+            rounded-full
+            flex-grow
+            text-lg
+            font-semibold
+            text-opacity-90 text-gray-800
+            border-2 border-transparent
+            hover:border-gray-500
+            transition-colors
+          "
           >{{ ratingScoreString }}</a
         >
         <span
           v-else
-          class="flex items-center justify-center flex-grow text-2xl text-center align-middle text-gray-300"
+          class="
+            flex
+            items-center
+            justify-center
+            flex-grow
+            text-2xl text-center
+            align-middle
+            text-gray-300
+          "
           >{{ '-' }}</span
         >
       </div>

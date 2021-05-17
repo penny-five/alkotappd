@@ -1,7 +1,16 @@
 <template>
   <input
     v-bind="$attrs"
-    class="w-full py-2 px-4 border-2 rounded-md border-gray-300 focus:border-gray-800 transition-colors"
+    class="
+      w-full
+      py-2
+      px-4
+      border-2
+      rounded-md
+      border-gray-300
+      focus:border-gray-800
+      transition-colors
+    "
     type="text"
     :value="modelValue"
     @input="onChange($event)"
