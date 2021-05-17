@@ -1,7 +1,5 @@
 # Alkotappd
 
-![Screenshot](gh_screenshot.png)
-
 <div align="center">
   <img height="40" width="50" src="https://cdn.svgporn.com/logos/typescript-icon.svg"/>
   <img height="40" width="50" src="https://cdn.svgporn.com/logos/vue.svg"/>
@@ -15,6 +13,8 @@
 ## What is this?
 
 Application that combines beers in [Alko](https://alko.fi)'s catalog with their matching [Untappd](https://untappd.com) scores.
+
+![Screenshot](gh_screenshot.png)
 
 ## Instructions
 
