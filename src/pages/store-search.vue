@@ -10,8 +10,7 @@
         v-for="store in storeSearchResults"
         :key="store.id"
         :store="store"
-        :selectable="true"
-        @select="onSelectStore(store)"
+        :is-link="true"
       />
     </ul>
   </div>
@@ -25,7 +24,6 @@ import { useApi } from '../composables/use-api';
 import LoadingIndicator from '../components/loading-indicator.vue';
 import SearchInput from '../components/search-input.vue';
 import StoreItem from '../components/store-item.vue';
-import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'App',
@@ -35,8 +33,6 @@ export default defineComponent({
     StoreItem
   },
   setup() {
-    const router = useRouter();
-
     const { api } = useApi();
 
     const storeSearchphrase = ref('');
@@ -53,20 +49,10 @@ export default defineComponent({
       }
     });
 
-    const onSelectStore = async (store: Store) => {
-      router.push({
-        name: 'store',
-        params: {
-          id: store.id
-        }
-      });
-    };
-
     return {
       isLoading,
       storeSearchphrase,
-      storeSearchResults,
-      onSelectStore
+      storeSearchResults
     };
   }
 });

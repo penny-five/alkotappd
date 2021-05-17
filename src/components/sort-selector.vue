@@ -4,7 +4,7 @@
     <ul class="flex flex-grow flex-row flex-wrap">
       <template v-for="option of options" :key="option">
         <li
-          v-if="modelValue.value === option.value"
+          v-if="modelValue.id === option.id"
           class="flex mb-2 mr-2 bg-gray-700 text-white rounded-full py-1 px-3 text-sm font-medium"
         >
           <span>{{ option.label }}</span>
@@ -39,7 +39,7 @@
 import { defineComponent, PropType } from 'vue';
 
 export interface SortOption {
-  value: string;
+  id: string;
   label: string;
 }
 

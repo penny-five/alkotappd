@@ -5,7 +5,7 @@
       <div class="my-4">
         <back-button @click="onClickBack">Takaisin hakuun</back-button>
       </div>
-      <store-item :store="store" :selectable="false" />
+      <store-item :store="store" :is-link="false" />
       <div class="my-4 sm:my-8 border-b-2 border-gray-200" />
       <sort-selector v-model="selectedSort" :options="sortOptions" />
       <product-item v-for="product of sortedProducts" :key="product.id" :product="product" />
@@ -25,11 +25,51 @@ import ProductItem from '../components/product-item.vue';
 import SortSelector, { SortOption } from '../components/sort-selector.vue';
 import StoreItem from '../components/store-item.vue';
 
-const SORT_BY_ABV: SortOption = { value: 'abv', label: 'ABV' };
-const SORT_BY_NAME: SortOption = { value: 'name', label: 'Nimi (A-Z)' };
-const SORT_BY_RATING: SortOption = { value: 'rating', label: 'Rating' };
-const SORT_BY_TYPE: SortOption = { value: 'type', label: 'Oluttyyppi' };
-const SORT_BY_COUNTRY: SortOption = { value: 'country', label: 'Valmistusmaa' };
+interface ProductSortOption extends SortOption {
+  sort(products: Product[]): Product[];
+}
+
+const SORT_BY_ABV: ProductSortOption = {
+  id: 'abv',
+  label: 'ABV',
+  sort: products =>
+    [...products].sort((first, second) => {
+      return parseInt(second.abv, 10) - parseInt(first.abv, 10);
+    })
+};
+
+const SORT_BY_NAME: ProductSortOption = {
+  id: 'name',
+  label: 'Nimi (A-Z)',
+  sort: products => products
+};
+
+const SORT_BY_RATING: ProductSortOption = {
+  id: 'rating',
+  label: 'Rating',
+  sort: products =>
+    [...products].sort((first, second) => {
+      return (second.untappdRatingScore || 0) - (first.untappdRatingScore || 0);
+    })
+};
+
+const SORT_BY_TYPE: ProductSortOption = {
+  id: 'type',
+  label: 'Oluttyyppi',
+  sort: products =>
+    [...products].sort((first, second) => {
+      return first.type.localeCompare(second.type);
+    })
+};
+
+const SORT_BY_COUNTRY: ProductSortOption = {
+  id: 'country',
+  label: 'Valmistusmaa',
+  sort: products =>
+    [...products].sort((first, second) => {
+      return first.country.localeCompare(second.country);
+    })
+};
 
 export default defineComponent({
   name: 'App',
@@ -60,7 +100,7 @@ export default defineComponent({
       isLoading.value = false;
     });
 
-    const sortOptions: SortOption[] = [
+    const sortOptions: ProductSortOption[] = [
       SORT_BY_NAME,
       SORT_BY_ABV,
       SORT_BY_RATING,
@@ -68,29 +108,12 @@ export default defineComponent({
       SORT_BY_COUNTRY
     ];
 
-    const selectedSort = ref<SortOption>(SORT_BY_NAME);
+    const selectedSort = ref<ProductSortOption>(SORT_BY_NAME);
 
     const sortedProducts = computed<Product[]>(() => {
-      switch (selectedSort.value.value) {
-        case SORT_BY_ABV.value:
-          return Array.from<Product>(storeProducts.value).sort((first, second) => {
-            return parseInt(second.abv, 10) - parseInt(first.abv, 10);
-          });
-        case SORT_BY_RATING.value:
-          return Array.from<Product>(storeProducts.value).sort((first, second) => {
-            return (second.untappdRatingScore || 0) - (first.untappdRatingScore || 0);
-          });
-        case SORT_BY_TYPE.value:
-          return Array.from<Product>(storeProducts.value).sort((first, second) => {
-            return first.type.localeCompare(second.type);
-          });
-        case SORT_BY_COUNTRY.value:
-          return Array.from<Product>(storeProducts.value).sort((first, second) => {
-            return first.country.localeCompare(second.country);
-          });
-        default:
-          return storeProducts.value;
-      }
+      return sortOptions
+        .find(option => option.id === selectedSort.value.id)!
+        .sort(storeProducts.value);
     });
 
     const onClickBack = () => {

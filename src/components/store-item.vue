@@ -1,15 +1,15 @@
 <template>
-  <router-link :to="linkTarget">
+  <component :is="isLink ? 'router-link' : 'span'" :to="isLink ? linkTarget : null">
     <li
       class="flex flex-col sm:flex-row py-3 px-4 transition-colors list-none"
-      :class="{ 'hover:bg-gray-100 cursor-pointer': selectable }"
+      :class="{ 'hover:bg-gray-100 cursor-pointer': isLink }"
     >
       <div class="flex-grow mr-8 truncate">
         <p class="font-semibold">{{ store.name }}</p>
         <p class="text-sm text-gray-800 truncate">{{ store.address }}</p>
       </div>
     </li>
-  </router-link>
+  </component>
 </template>
 
 <script lang="ts">
@@ -17,10 +17,7 @@ import { defineComponent, PropType } from 'vue';
 import { RouteLocationRaw } from 'vue-router';
 
 import { Store } from '../clients/api';
-
-const createStoreSlug = (store: Store) => {
-  return store.name.toLowerCase().replaceAll(' ', '-');
-};
+import { createStoreSlug } from '../utils';
 
 export default defineComponent({
   name: 'StoreItem',
@@ -29,7 +26,7 @@ export default defineComponent({
       type: Object as PropType<Store>,
       required: true
     },
-    selectable: {
+    isLink: {
       type: Boolean,
       default: true
     }
