@@ -47,7 +47,7 @@ export class AlkoClient {
 
     const stores: AlkoStore[] = $('.store-choice')
       .map((_index, el) => ({
-        id: $(el).find('input:radio').attr('data-store-id'),
+        id: $(el).find('input:radio').attr('data-store-id')!,
         name: $(el).find('label').text().trim(),
         address: $(el).find('.radio-content').text().trim()
       }))
